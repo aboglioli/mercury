@@ -2,9 +2,11 @@ const url = require('url');
 
 const config = require('./config');
 const hello = require('./resources/hello/routes');
+const users = require('./resources/users/routes');
 
 const routes = {
-  hello
+  hello,
+  users
 };
 
 let endpoints = [];

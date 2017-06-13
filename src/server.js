@@ -8,6 +8,8 @@ const routes = require('./routes');
 
 const server = new Hapi.Server();
 
+require('./core/db');
+
 server.connection({
   host: config.app.host,
   port: config.app.port,
