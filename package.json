@@ -1,0 +1,35 @@
+{
+  "name": "saturn",
+  "version": "1.0.0",
+  "description": "E-Commerce Backend API",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app/index.js",
+    "test": "mocha tests --recursive"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aboglioli/saturn.git"
+  },
+  "author": "Alan Boglioli <alan.boglioli@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aboglioli/saturn/issues"
+  },
+  "homepage": "https://github.com/aboglioli/saturn#readme",
+  "dependencies": {
+    "dotenv": "^4.0.0",
+    "hapi": "^16.4.3",
+    "hapi-async-handler": "^1.0.3",
+    "hapi-swagger": "^7.7.0",
+    "inert": "^4.2.0",
+    "joi": "^10.5.2",
+    "mongoose": "^4.10.6",
+    "vision": "^4.1.1"
+  },
+  "devDependencies": {
+    "chai": "^4.0.2",
+    "mocha": "^3.4.2",
+    "nodemon": "^1.11.0"
+  }
+}
