@@ -10,8 +10,17 @@ module.exports = [
       handler: {
         async: UsersHandler.get
       },
+      auth: {
+        strategy: 'jwt',
+        scope: 'admin'
+      },
       description: 'Get all the users',
-      tags: ['api', 'users']
+      tags: ['api', 'users'],
+      validate: {
+        headers: Joi.object({
+          authorization: Joi.string().required()
+        }).unknown()
+      }
     }
   },
   {
@@ -21,6 +30,10 @@ module.exports = [
       handler: {
         async: UsersHandler.post
       },
+      auth: {
+        strategy: 'jwt',
+        scope: 'admin'
+      },
       description: 'Create user',
       tags: ['api', 'users'],
       validate: {
@@ -28,7 +41,10 @@ module.exports = [
           name: Joi.string(),
           email: Joi.string().email().required(),
           password: Joi.string().required()
-        }
+        },
+        headers: Joi.object({
+          authorization: Joi.string().required()
+        }).unknown()
       }
     }
   }
