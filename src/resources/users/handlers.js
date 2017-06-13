@@ -8,11 +8,7 @@ class UsersHandler {
   static async post(request, reply) {
     const {name, email, password} = request.payload;
 
-    const user = new User({
-      name,
-      email,
-      password
-    });
+    const user = new User({name, email, password});
 
     await user.save();
 

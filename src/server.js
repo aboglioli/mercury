@@ -5,10 +5,11 @@ const HapiSwagger = require('hapi-swagger');
 
 const config = require('./config');
 const routes = require('./routes');
-
-const server = new Hapi.Server();
+const { authenticate } = require('./core/authentication');
 
 require('./core/db');
+
+const server = new Hapi.Server();
 
 server.connection({
   host: config.app.host,
@@ -41,15 +42,30 @@ server.register([
       console.error(err);
       process.exit(1);
     }
-
-    server.route(routes);
-
-    server.start((err) => {
-      if (err) {
-        console.error(err);
-        process.exit(1);
-      }
-
-      console.log('Server running at:', server.info.uri);
-    });
   });
+
+server.register(require('hapi-auth-jwt2'), err => {
+  if(err) {
+    console.error(err);
+    process.exit(1);
+  }
+
+  server.auth.strategy('jwt', 'jwt', {
+    key: config.app.jwtKey,
+    validateFunc: authenticate,
+    verifyOptions: {
+      algorithms: ['HS256']
+    }
+  });
+
+  server.route(routes);
+});
+
+server.start((err) => {
+  if (err) {
+    console.error(err);
+    process.exit(1);
+  }
+
+  console.log('Server running at:', server.info.uri);
+});

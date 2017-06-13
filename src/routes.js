@@ -1,32 +1,15 @@
 const url = require('url');
 
 const config = require('./config');
+const { buildRoutes } = require('./utils/routes');
 const hello = require('./resources/hello/routes');
 const users = require('./resources/users/routes');
+const account = require('./resources/account/routes');
 
 const routes = {
   hello,
-  users
+  users,
+  account
 };
 
-let endpoints = [];
-
-Object.keys(routes).forEach(key => {
-  endpoints = [
-    ...endpoints,
-    ...routes[key].map(route => {
-      route.path = [
-        config.app.routes.prefix,
-        config.app.routes.version,
-        key,
-        route.path
-      ].join('/');
-
-      route.path = '/' + route.path.substring(0, route.path.length - 1);
-
-      return route;
-    })
-  ];
-});
-
-module.exports = endpoints;
+module.exports = buildRoutes(config.app.routes, routes);

@@ -1,18 +1,21 @@
 const package = require('../../package');
 
+const env = process.env;
+
 module.exports = {
   app: {
-    host: '0.0.0.0',
-    port: 3000,
+    host: env.APP_HOST || '0.0.0.0',
+    port: env.APP_PORT || 3000,
     routes: {
       prefix: 'api',
       version: 'v1'
-    }
+    },
+    jwtKey: env.JWT_KEY || 'qwerty'
   },
   database: {
-    host: 'mongodb',
-    port: 27017,
-    name: 'saturn'
+    host: env.DB_HOST || 'mongodb',
+    port: env.DB_PORT || 27017,
+    name: env.DB_NAME || 'saturn'
   },
   swagger: {
     info: {

@@ -18,18 +18,23 @@
   },
   "homepage": "https://github.com/aboglioli/saturn#readme",
   "dependencies": {
+    "bcrypt": "^1.0.2",
     "dotenv": "^4.0.0",
     "hapi": "^16.4.3",
     "hapi-async-handler": "^1.0.3",
+    "hapi-auth-jwt2": "^7.2.4",
     "hapi-swagger": "^7.7.0",
     "inert": "^4.2.0",
     "joi": "^10.5.2",
+    "jsonwebtoken": "^7.4.1",
     "mongoose": "^4.10.6",
+    "url-join": "^2.0.2",
     "vision": "^4.1.1"
   },
   "devDependencies": {
     "chai": "^4.0.2",
     "mocha": "^3.4.2",
+    "mockgoose": "^7.3.3",
     "nodemon": "^1.11.0"
   }
 }
