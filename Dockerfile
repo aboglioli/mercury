@@ -1,19 +1,17 @@
 FROM node:latest
 
-RUN apt-get install -y libstdc++6
-
 RUN mkdir /src
+WORKDIR /src
 
+RUN apt-get install -y libstdc++6
 RUN npm install nodemon -g
 
-WORKDIR /src
 ADD package.json /src/package.json
+ADD nodemon.json /src/nodemon.json
 RUN npm install
 
-RUN ls -l
-
-ADD nodemon.json /src/nodemon.json
+ADD . /src/app
 
 EXPOSE 3000
 
-CMD npm start
+CMD npm run docker-start

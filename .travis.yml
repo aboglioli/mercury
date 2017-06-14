@@ -1,0 +1,14 @@
+sudo: true
+dist: trusty
+
+jobs:
+  include:
+    - stage: build docker image
+      script:
+      - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+      - docker build -t mercury .
+      - docker images
+      - docker tag mercury $DOCKER_USERNAME/mercury
+      - docker push $DOCKER_USERNAME/mercury
+    - stage: test
+      script: docker run --rm $DOCKER_USERNAME/mercury cat package.json
