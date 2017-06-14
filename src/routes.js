@@ -5,11 +5,13 @@ const { buildRoutes } = require('./utils/routes');
 const hello = require('./resources/hello/routes');
 const users = require('./resources/users/routes');
 const account = require('./resources/account/routes');
+const setup = require('./resources/setup/routes');
 
 const routes = {
   hello,
   users,
-  account
+  account,
+  setup
 };
 
 module.exports = buildRoutes(config.app.routes, routes);
