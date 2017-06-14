@@ -6,7 +6,7 @@ class UsersHandler {
   }
 
   static async post(request, reply) {
-    const user = User.create(request.payload);
+    const user = await User.create(request.payload);
     return reply().code(201);
   }
 }

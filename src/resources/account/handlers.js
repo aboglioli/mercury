@@ -12,7 +12,7 @@ class AccountHandler {
   static async login(request, reply) {
     const {email, password} = request.payload;
 
-    const user = User.getByEmail(email);
+    const user = await User.getByEmail(email);
 
     if(!user || !comparePasswords(password, user.password)) {
       return reply({message: 'Invalid credentials'}).code(400);
@@ -26,7 +26,7 @@ class AccountHandler {
   }
 
   static async register(request, reply) {
-    const user = User.create(request.payload);
+    const user = await User.create(request.payload);
     return reply().code(201);
   }
 

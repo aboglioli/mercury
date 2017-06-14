@@ -11,6 +11,7 @@ async function create(data) {
 }
 
 async function getById(userId) {
+  console.log(userId);
   return await UserSchema.findById(userId);
 }
 

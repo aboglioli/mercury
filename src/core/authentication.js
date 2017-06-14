@@ -1,10 +1,10 @@
 const bcrypt = require('bcrypt');
 
-const User = require('../resources/users/models');
+const UserSchema = require('../schemas/user');
 
 async function authenticate(decoded, request, callback) {
   try {
-    const user = await User.findById(decoded.id);
+    const user = await UserSchema.findById(decoded.id);
 
     if(!user) {
       return callback(null, false);
