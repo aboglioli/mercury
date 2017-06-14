@@ -1,12 +1,30 @@
-const mongoose = require('mongoose');
+const { generateHash } = require('../../core/authentication');
+const UserSchema = require('../../schemas/user');
 
-const userSchema = new mongoose.Schema({
-  name: String,
-  email: {type: String, required: true},
-  password: {type: String, required: true},
-  scope: [String],
-  created_at: Date,
-  updated_at: Date
-});
+async function create(data) {
+  data.password = generateHash(data.password);
 
-module.exports = mongoose.model('User', userSchema);
+  const user = new UserSchema(data);
+  await user.save();
+
+  return user;
+}
+
+async function getById(userId) {
+  return await UserSchema.findById(userId);
+}
+
+async function getByEmail(email) {
+  return await UserSchema.findOne({email});
+}
+
+async function getAll() {
+  return await UserSchema.find({});
+}
+
+module.exports = {
+  create,
+  getById,
+  getByEmail,
+  getAll
+};

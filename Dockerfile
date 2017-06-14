@@ -1,5 +1,7 @@
 FROM node:latest
 
+RUN apt-get install -y libstdc++6
+
 RUN mkdir /src
 
 RUN npm install nodemon -g

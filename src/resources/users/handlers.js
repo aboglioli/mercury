@@ -2,16 +2,11 @@ const User = require('./models');
 
 class UsersHandler {
   static async get(request, reply) {
-    return reply(await User.find({}));
+    return reply(await User.getAll());
   }
 
   static async post(request, reply) {
-    const {name, email, password} = request.payload;
-
-    const user = new User({name, email, password});
-
-    await user.save();
-
+    const user = User.create(request.payload);
     return reply().code(201);
   }
 }

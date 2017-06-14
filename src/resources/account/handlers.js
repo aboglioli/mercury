@@ -2,19 +2,19 @@ const JWT = require('jsonwebtoken');
 
 const config = require('../../config');
 const User = require('../users/models');
+const { comparePasswords } = require('../../core/authentication');
 
 class AccountHandler {
   static async get(request, reply) {
-    console.log(request.auth.credentials);
-    return reply(await User.findById(request.auth.credentials.id));
+    return reply(await User.getById(request.auth.credentials.id));
   }
 
   static async login(request, reply) {
     const {email, password} = request.payload;
 
-    const user = await User.findOne({email, password});
+    const user = User.getByEmail(email);
 
-    if(!user) {
+    if(!user || !comparePasswords(password, user.password)) {
       return reply({message: 'Invalid credentials'}).code(400);
     }
 
@@ -26,12 +26,7 @@ class AccountHandler {
   }
 
   static async register(request, reply) {
-    const {name, email, password} = request.payload;
-
-    const user = new User({name, email, password});
-
-    await user.save();
-
+    const user = User.create(request.payload);
     return reply().code(201);
   }
 

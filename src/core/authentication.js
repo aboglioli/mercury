@@ -1,3 +1,5 @@
+const bcrypt = require('bcrypt');
+
 const User = require('../resources/users/models');
 
 async function authenticate(decoded, request, callback) {
@@ -12,9 +14,19 @@ async function authenticate(decoded, request, callback) {
   } catch(err) {
     return callback(null, false);
   }
+}
 
+function generateHash(password) {
+  const salt = bcrypt.genSaltSync(10);
+  return bcrypt.hashSync(password, salt);
+}
+
+function comparePasswords(password1, password2) {
+  return bcrypt.compareSync(password1, password2);
 }
 
 module.exports = {
-  authenticate
+  authenticate,
+  generateHash,
+  comparePasswords
 };

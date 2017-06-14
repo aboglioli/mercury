@@ -32,7 +32,8 @@ module.exports = [
       },
       auth: {
         strategy: 'jwt',
-        scope: 'admin'
+        scope: 'admin',
+        mode: 'try'
       },
       description: 'Create user',
       tags: ['api', 'users'],
