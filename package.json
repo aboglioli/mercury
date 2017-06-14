@@ -1,5 +1,5 @@
 {
-  "name": "saturn",
+  "name": "mercury",
   "version": "1.0.0",
   "description": "E-Commerce Backend API",
   "main": "index.js",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/aboglioli/saturn.git"
+    "url": "git+https://github.com/aboglioli/mercury.git"
   },
   "author": "Alan Boglioli <alan.boglioli@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/aboglioli/saturn/issues"
+    "url": "https://github.com/aboglioli/mercury/issues"
   },
-  "homepage": "https://github.com/aboglioli/saturn#readme",
+  "homepage": "https://github.com/aboglioli/mercury#readme",
   "dependencies": {
     "bcrypt": "^1.0.2",
     "dotenv": "^4.0.0",

@@ -15,11 +15,11 @@ module.exports = {
   database: {
     host: env.DB_HOST || 'mongodb',
     port: env.DB_PORT || 27017,
-    name: env.DB_NAME || 'saturn'
+    name: env.DB_NAME || 'mercury'
   },
   swagger: {
     info: {
-      title: 'Saturn API Documentation',
+      title: 'Mercury API Documentation',
       version: package.version
     },
     basePath: '/api/v1',
