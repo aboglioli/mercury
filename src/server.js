@@ -7,8 +7,6 @@ const config = require('./config');
 const routes = require('./routes');
 const { authenticate } = require('./core/authentication');
 
-require('./core/db');
-
 const server = new Hapi.Server();
 
 server.connection({
@@ -29,7 +27,6 @@ server.register(require('hapi-async-handler'), function(err) {
     process.exit(1);
   }
 });
-
 
 server.register([
   Inert,
@@ -69,3 +66,5 @@ server.start((err) => {
 
   console.log('Server running at:', server.info.uri);
 });
+
+module.exports = server;
