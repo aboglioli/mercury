@@ -2,7 +2,10 @@ const Product = require('./models');
 
 class ProductHandler {
   static async get(request, reply) {
-    return reply(await Product.getAll());
+    if(request.query)
+      return reply(await Product.find(request.query));
+
+    return reply(await Product.find());
   }
 
   static async getById(request, reply) {

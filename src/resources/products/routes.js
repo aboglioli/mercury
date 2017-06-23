@@ -11,7 +11,14 @@ module.exports = [
         async: ProductHandler.get
       },
       description: 'Get all the products',
-      tags: ['api', 'products']
+      tags: ['api', 'products'],
+      validate: {
+        query: {
+          sku: Joi.string().optional(),
+          collections: Joi.string().optional(),
+          name: Joi.string().optional()
+        }
+      }
     }
   },
   {
@@ -45,9 +52,19 @@ module.exports = [
       tags: ['api', 'products'],
       validate: {
         payload: {
+          enabled: Joi.boolean().optional(),
+          sku: Joi.string().required(),
           name: Joi.string().required(),
           description: Joi.string().required(),
-          price: Joi.number().required()
+          price: Joi.object({
+            currency: Joi.string().required(),
+            vat: Joi.number().required(),
+            retail: Joi.number().required(),
+            wholesale: Joi.number().required()
+          }).required(),
+          images: Joi.array().items(Joi.string()).optional(),
+          stock: Joi.number().required(),
+          collections: Joi.array().items(Joi.string()).optional()
         },
         headers: Joi.object({
           authorization: Joi.string().required()

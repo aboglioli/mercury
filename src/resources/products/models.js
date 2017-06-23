@@ -18,14 +18,14 @@ async function getById(productId) {
   return await Product.findById(productId).populate('author');
 }
 
-async function getAll() {
+async function find(filters = {}) {
   return await Product
-    .find({})
-    .populate('author');
+    .find(filters)
+    .populate('author', '_id name email scope');
 }
 
 module.exports = {
   create,
   getById,
-  getAll
+  find
 };
