@@ -5,9 +5,13 @@ class ProductHandler {
     return reply(await Product.getAll());
   }
 
+  static async getById(request, reply) {
+    return reply(await Product.getById(request.params.productId));
+  }
+
   static async post(request, reply) {
     const product = await Product.create(request.payload, request.auth.credentials.id);
-    return reply().code(201);
+    return reply(product).code(201);
   }
 }
 

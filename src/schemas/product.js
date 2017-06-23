@@ -4,7 +4,8 @@ const productSchema = new mongoose.Schema({
   name: {type: String, required: true},
   description: {type: String, required: true},
   author: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
-  created_at: Date,
+  price: Number,
+  created_at: {type: Date, default: Date.now},
   updated_at: Date
 });
 

@@ -14,10 +14,6 @@ class AccountHandler {
 
     const user = await User.getByEmail(email);
 
-    console.log('login');
-    console.log(password);
-    console.log(user.password);
-
     if(!user || !comparePasswords(password, user.password)) {
       return reply({message: 'Invalid credentials'}).code(400);
     }
