@@ -22,9 +22,14 @@ async function getAll() {
   return await UserSchema.find({});
 }
 
+async function removeByEmail(email) {
+  return await UserSchema.find({email}).remove();
+}
+
 module.exports = {
   create,
   getById,
   getByEmail,
-  getAll
+  getAll,
+  removeByEmail
 };
