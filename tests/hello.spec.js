@@ -2,7 +2,7 @@ const { expect } = require('chai');
 const request = require('supertest');
 
 const config = require('../src/config');
-const server = require('../index');
+const [_, server] = require('../index');
 
 describe('Hello', () => {
 	it('GET /hello', (done) => {

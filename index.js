@@ -1,4 +1,3 @@
 require('dotenv').config();
 
-require('./src/core/db');
-module.exports = require('./src/server');
+module.exports = [require('./src/core/db'), require('./src/server')];
