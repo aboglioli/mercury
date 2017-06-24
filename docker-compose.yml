@@ -11,6 +11,17 @@ services:
     links:
       - mongodb
 
+  test:
+    build:
+      context: .
+    volumes:
+      - "./:/src/app"
+    environment:
+      - DB_NAME=mercury-test
+    command: npm run docker-test
+    links:
+      - mongodb
+
   mongodb:
     image: mongo
     ports:

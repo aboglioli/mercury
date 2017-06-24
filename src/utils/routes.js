@@ -7,12 +7,20 @@ function buildRoutes(config, routes) {
     endpoints = [
       ...endpoints,
       ...routes[key].map(route => {
-        route.path = joinUrl(
-          config.prefix,
-          config.version,
-          key,
-          route.path
-        );
+        if(route.path) {
+          route.path = joinUrl(
+            config.prefix,
+            config.version,
+            key,
+            route.path
+          );
+        } else {
+          route.path = joinUrl(
+            config.prefix,
+            config.version,
+            key
+          );
+        }
 
         route.path = '/' + route.path;
 
