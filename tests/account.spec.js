@@ -11,10 +11,7 @@ describe('Account', () => {
       .expect('Content-Type', /json/)
       .expect(201)
       .end((err ,res) => {
-        expect(res.body.email).to.equal('admin@admin.com');
-        expect(res.body.password.length > 10).to.equal(true);
-        expect(res.body.scope).to.deep.equal(['admin']);
-		    done(err);
+        done(err);
       });
   });
 

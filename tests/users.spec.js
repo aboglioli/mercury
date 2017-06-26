@@ -3,8 +3,7 @@ const { expect } = require('chai');
 const request = require('supertest');
 
 const config = require('../src/config');
-const [dbConnection, server] = require('../index');
-dbConnection.connection.dropDatabase();
+const [_, server] = require('../index');
 
 describe('Users', () => {
   let authToken;
