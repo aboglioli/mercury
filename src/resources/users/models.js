@@ -18,8 +18,7 @@ async function getById(userId) {
 
 async function getByEmail(email) {
   return await UserSchema
-    .findOne({email})
-    .select('-password');
+    .findOne({email});
 }
 
 async function getAll() {

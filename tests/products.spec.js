@@ -11,7 +11,7 @@ describe('Products', () => {
 
 	it('GET /products', (done) => {
     request(server.listener)
-      .get('/api/v1/product')
+      .get('/api/v1/products')
       .expect('Content-Type', /json/)
       .expect(200)
       .end((err ,res) => {

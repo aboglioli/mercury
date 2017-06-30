@@ -17,9 +17,10 @@ describe('Users', () => {
         if(err) {
           done(err);
         } else {
-          expect(res.body.email).to.equal('admin@admin.com');
-          expect(res.body.password.length > 10).to.equal(true);
-          expect(res.body.scope).to.deep.equal(['admin']);
+          const admin = res.body.user;
+          expect(admin.email).to.equal('admin@admin.com');
+          expect(admin.password.length > 10).to.equal(true);
+          expect(admin.scope).to.deep.equal(['admin']);
 
           request(server.listener)
             .post('/api/v1/account/login')

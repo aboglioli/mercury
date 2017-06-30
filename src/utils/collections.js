@@ -1,9 +1,10 @@
 const _ = require('lodash');
 
 function makeTree(collections) {
+  console.log(collections);
   return collections.reduce((arr, el) => {
-    if(el.parentId) {
-      const parent = collections.find(p => p._id.toString() === el.parentId);
+    if(el.parent) {
+      const parent = collections.find(p => p._id.equals(el.parent));
 
       if(!parent['children'] || !Array.isArray(parent['children'])) {
         parent['children'] = [];

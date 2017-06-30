@@ -4,7 +4,6 @@ const Collection = require('../../schemas/collection');
 const config = require('../../config');
 
 async function getAll() {
-  // TODO: fix it
   return await Collection.find({}).lean();
 }
 

@@ -26,7 +26,7 @@ module.exports = [
       validate: {
         payload: {
           name: Joi.string().required(),
-          parentId: Joi.string().optional()
+          parent: Joi.string().optional()
         }
       }
     }
