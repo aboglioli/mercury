@@ -6,13 +6,13 @@ const productSchema = new mongoose.Schema({
   name: {type: String, required: true},
   description: {type: String, required: true},
   author: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
-  price: [{
+  price: {
     currency: String,
     vat: Number,
     wholesale: Number,
     retail: Number,
     updated_at: {type: Date, default: Date.now}
-  }],
+  },
   images: [String],
   stock: Number,
   collections: [{type: mongoose.Schema.Types.ObjectId, ref: 'Collection'}],

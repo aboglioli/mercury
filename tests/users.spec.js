@@ -42,6 +42,7 @@ describe('Users', () => {
         if(err) {
           done(err);
         } else {
+          console.log(res.body);
           expect(res.body.length > 0).to.be.true;
           done(err);
         }

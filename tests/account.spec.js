@@ -1,11 +1,12 @@
 const { expect } = require('chai');
 
 const config = require('../src/config');
-const [_, server] = require('../index');
-
+const [db, server] = require('../index');
+const User = require('../src/schemas/user');
 const r = require('./request')(server);
 
 describe('Account', () => {
+
   before((done) => {
     r.get('setup')
       .expect(201)
