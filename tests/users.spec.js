@@ -2,36 +2,35 @@ const { expect } = require('chai');
 
 const config = require('../src/config');
 const [_, server] = require('../index');
+const UserSchema = require('../src/schemas/user');
+const User = require('../src/resources/users/models');
 
 const r = require('./request')(server);
 
 describe('Users', () => {
   let authToken;
 
-  before((done) => {
-    r.get('setup')
-      .expect(201)
-      .end((err ,res) => {
-        if(err) {
-          done(err);
-        } else {
-          const admin = res.body.user;
-          expect(admin.email).to.equal('admin@admin.com');
-          expect(admin.scope).to.deep.equal(['admin']);
+  beforeEach((done) => {
+    UserSchema.remove({}, () => {
+      User.create({
+        name: 'Admin',
+        email: 'admin@admin.com',
+        password: '123456',
+        scope: ['admin']
+      }).then(() => {
+        r.post('account/login')
+          .send({email: 'admin@admin.com', password: '123456'})
+          .expect(200)
+          .end((err ,res) => {
+            expect(res.body.authToken).to.not.be.undefined;
+            expect(res.body.authToken.length > 20).to.equal(true);
 
-          r.post('account/login')
-            .send({email: 'admin@admin.com', password: '123456'})
-            .expect(200)
-            .end((err ,res) => {
-              expect(res.body.authToken).to.not.be.undefined;
-              expect(res.body.authToken.length > 20).to.equal(true);
+            adminToken = res.body.authToken;
 
-              adminToken = res.body.authToken;
-
-		          done(err);
-            });
-        }
+		        done(err);
+          });
       });
+    });
   });
 
 	it('GET /users', (done) => {
@@ -42,7 +41,6 @@ describe('Users', () => {
         if(err) {
           done(err);
         } else {
-          console.log(res.body);
           expect(res.body.length > 0).to.be.true;
           done(err);
         }

@@ -1,18 +1,22 @@
 const { expect } = require('chai');
 
 const config = require('../src/config');
-const [db, server] = require('../index');
-const User = require('../src/schemas/user');
+const {addAdminAccount} = require('./utils');
+const [_, server] = require('../index');
+const UserSchema = require('../src/schemas/user');
+const User = require('../src/resources/users/models');
 const r = require('./request')(server);
 
 describe('Account', () => {
-
-  before((done) => {
-    r.get('setup')
-      .expect(201)
-      .end((err ,res) => {
-        done(err);
-      });
+  beforeEach((done) => {
+    UserSchema.remove({}, () => {
+      User.create({
+        name: 'Admin',
+        email: 'admin@admin.com',
+        password: '123456',
+        scope: ['admin']
+      }).then(() => done());
+    });
   });
 
 	it('POST /account/login', (done) => {
