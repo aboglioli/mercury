@@ -1,5 +1,3 @@
-const _ = require('lodash');
-
 const CollectionSchema = require('../../schemas/collection');
 const config = require('../../config');
 
