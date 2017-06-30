@@ -1,5 +1,7 @@
 const { generateHash } = require('../../core/authentication');
+
 const User = require('../users/models');
+const Configuration = require('../configuration/models');
 
 class SetupHandler {
   static async get(request, reply) {
@@ -12,7 +14,25 @@ class SetupHandler {
       scope: ['admin']
     });
 
-    reply(user).code(201);
+    const configuration = await Configuration.set({
+      language: {
+        label: 'Español',
+        value: 'es'
+      },
+      currencies: [{
+        label: 'ARS',
+        value: 'ars'
+      }],
+      genders: [{
+        label: 'Hombre',
+        value: 'man'
+      }, {
+        label: 'Mujer',
+        value: 'woman'
+      }]
+    });
+
+    reply({user, configuration}).code(201);
   }
 }
 

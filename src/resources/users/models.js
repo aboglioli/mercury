@@ -11,15 +11,21 @@ async function create(data) {
 }
 
 async function getById(userId) {
-  return await UserSchema.findById(userId);
+  return await UserSchema
+    .findById(userId)
+    .select('-password');
 }
 
 async function getByEmail(email) {
-  return await UserSchema.findOne({email});
+  return await UserSchema
+    .findOne({email})
+    .select('-password');
 }
 
 async function getAll() {
-  return await UserSchema.find({});
+  return await UserSchema
+    .find({})
+    .select('-password');
 }
 
 async function removeByEmail(email) {
