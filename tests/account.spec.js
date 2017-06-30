@@ -2,9 +2,10 @@ const { expect } = require('chai');
 
 const config = require('../src/config');
 const {addAdminAccount} = require('./utils');
-const [_, server] = require('../index');
 const UserSchema = require('../src/schemas/user');
 const User = require('../src/resources/users/models');
+
+const server = require('./index');
 const r = require('./request')(server);
 
 describe('Account', () => {
