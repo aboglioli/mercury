@@ -13,6 +13,7 @@ class ProductHandler {
   }
 
   static async post(request, reply) {
+    console.log(request.payload, request.auth.credentials.id);
     const product = await Product.create(request.payload, request.auth.credentials.id);
     return reply(product).code(201);
   }

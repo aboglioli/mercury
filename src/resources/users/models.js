@@ -7,7 +7,7 @@ async function create(data) {
   const user = new UserSchema(data);
   await user.save();
 
-  return user;
+  return getById(user._id);
 }
 
 async function getById(userId) {
@@ -25,6 +25,10 @@ async function getAll() {
   return await UserSchema
     .find({})
     .select('-password');
+}
+
+async function removeById(userId) {
+  return await UserSchema.findById(userId).remove();
 }
 
 async function removeByEmail(email) {

@@ -1,4 +1,5 @@
 const JWT = require('jsonwebtoken');
+const _ = require('lodash');
 
 const config = require('../../config');
 const User = require('../users/models');
@@ -27,7 +28,7 @@ class AccountHandler {
 
   static async register(request, reply) {
     const user = await User.create(request.payload);
-    return reply().code(201);
+    return reply(_.omit(user, ['password'])).code(201);
   }
 
 }

@@ -1,27 +1,24 @@
-const Product = require('../../schemas/product');
+const ProductSchema = require('../../schemas/product');
 
-async function create(data, userId) {
-  const {name, description, price} = data;
-
-  const product = new Product({
-    name,
-    description,
-    price,
-    author: userId
-  });
+async function create(data, author) {
+  const product = new ProductSchema(Object.assign({}, data, {author}));
   await product.save();
 
-  return product;
+  return getById(product._id);
 }
 
 async function getById(productId) {
-  return await Product.findById(productId).populate('author');
+  return await ProductSchema
+    .findById(productId)
+    .populate('author')
+    .populate('collections');
 }
 
 async function find(filters = {}) {
-  return await Product
+  return await ProductSchema
     .find(filters)
-    .populate('author', '_id name email scope');
+    .populate('author', 'name email scope')
+    .populate('collections');
 }
 
 module.exports = {

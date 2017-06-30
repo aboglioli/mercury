@@ -1,8 +1,9 @@
 const { expect } = require('chai');
-const request = require('supertest');
 
 const config = require('../src/config');
 const [_, server] = require('../index');
+
+const r = require('./request')(server);
 
 describe('Products', () => {
   before((done) => {
@@ -10,9 +11,7 @@ describe('Products', () => {
   });
 
 	it('GET /products', (done) => {
-    request(server.listener)
-      .get('/api/v1/products')
-      .expect('Content-Type', /json/)
+    r.get('products')
       .expect(200)
       .end((err ,res) => {
         done(err);

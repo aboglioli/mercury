@@ -1,17 +1,15 @@
-
 const { expect } = require('chai');
-const request = require('supertest');
 
 const config = require('../src/config');
 const [_, server] = require('../index');
+
+const r = require('./request')(server);
 
 describe('Users', () => {
   let authToken;
 
   before((done) => {
-    request(server.listener)
-      .get('/api/v1/setup')
-      .expect('Content-Type', /json/)
+    r.get('setup')
       .expect(201)
       .end((err ,res) => {
         if(err) {
@@ -19,13 +17,10 @@ describe('Users', () => {
         } else {
           const admin = res.body.user;
           expect(admin.email).to.equal('admin@admin.com');
-          expect(admin.password.length > 10).to.equal(true);
           expect(admin.scope).to.deep.equal(['admin']);
 
-          request(server.listener)
-            .post('/api/v1/account/login')
+          r.post('account/login')
             .send({email: 'admin@admin.com', password: '123456'})
-            .expect('Content-Type', /json/)
             .expect(200)
             .end((err ,res) => {
               expect(res.body.authToken).to.not.be.undefined;
@@ -40,10 +35,8 @@ describe('Users', () => {
   });
 
 	it('GET /users', (done) => {
-    request(server.listener)
-      .get('/api/v1/users')
+    r.get('users')
       .set('Authorization', adminToken)
-      .expect('Content-Type', /json/)
       .expect(200)
       .end((err ,res) => {
         if(err) {

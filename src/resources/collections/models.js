@@ -1,14 +1,14 @@
 const _ = require('lodash');
 
-const Collection = require('../../schemas/collection');
+const CollectionSchema = require('../../schemas/collection');
 const config = require('../../config');
 
 async function getAll() {
-  return await Collection.find({}).lean();
+  return await CollectionSchema.find({}).lean();
 }
 
 async function create(data) {
-  const collection = new Collection(data);
+  const collection = new CollectionSchema(data);
   return await collection.save();
 }
 
