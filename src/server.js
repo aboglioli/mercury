@@ -1,4 +1,5 @@
 const Hapi = require('hapi');
+const corsHeaders = require('hapi-cors-headers');
 const Inert = require('inert');
 const Vision = require('vision');
 const HapiSwagger = require('hapi-swagger');
@@ -14,9 +15,9 @@ server.connection({
   port: config.app.port,
   routes: {
     cors: {
-      additionalHeaders: [
-        'Origin'
-      ]
+      origin: ['*'],
+      credentials: true,
+      additionalHeaders: ['Origin', 'Access-Control-Allow-Origin']
     }
   }
 });
@@ -57,6 +58,8 @@ server.register(require('hapi-auth-jwt2'), err => {
 
   server.route(routes);
 });
+
+server.ext('onPreResponse', corsHeaders);
 
 server.start((err) => {
   if (err) {
