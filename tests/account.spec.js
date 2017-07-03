@@ -1,10 +1,8 @@
-const { expect } = require('chai');
+const {expect} = require('chai');
 
 const config = require('../src/config');
-const {addAdminAccount} = require('./utils');
 const UserSchema = require('../src/schemas/user');
 const User = require('../src/resources/users/models');
-
 const server = require('./index');
 const r = require('./request')(server);
 

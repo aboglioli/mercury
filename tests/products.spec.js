@@ -1,8 +1,7 @@
-const { expect } = require('chai');
+const {expect} = require('chai');
 
 const config = require('../src/config');
-const [_, server] = require('../index');
-
+const server = require('./index');
 const r = require('./request')(server);
 
 describe('Products', () => {
