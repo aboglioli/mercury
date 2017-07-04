@@ -66,9 +66,9 @@ module.exports = [
           stock: Joi.number().required(),
           collections: Joi.array().items(Joi.string()).optional()
         },
-        // headers: Joi.object({
-        //   authorization: Joi.string().required()
-        // }).unknown()
+        headers: Joi.object({
+          authorization: Joi.string().required()
+        }).unknown()
       }
     }
   }
