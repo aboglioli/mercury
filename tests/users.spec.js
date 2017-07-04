@@ -1,10 +1,9 @@
-const { expect } = require('chai');
+const {expect} = require('chai');
 
 const config = require('../src/config');
-const [_, server] = require('../index');
+const server = require('./index');
 const UserSchema = require('../src/schemas/user');
 const User = require('../src/resources/users/models');
-
 const r = require('./request')(server);
 
 describe('Users', () => {

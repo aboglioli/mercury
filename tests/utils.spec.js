@@ -1,9 +1,8 @@
-const { expect } = require('chai');
+const {expect} = require('chai');
 
 const {omitDeep} = require('./utils');
 const {buildRoutes} = require('../src/utils/routes');
 const {makeTree} = require('../src/utils/collections');
-
 const routes = require('../src/routes');
 
 class CollectionId {

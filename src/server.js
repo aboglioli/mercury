@@ -22,6 +22,22 @@ server.connection({
   }
 });
 
+if (config.app.logging) {
+  server.ext({
+    type: 'onRequest',
+    method: (request, reply) => {
+      const path = request.path;
+
+      if(path.startsWith('/docs') || path.startsWith('/swagger'))
+        return reply.continue();
+
+      console.log(request.path, request.query);
+
+      return reply.continue();
+    }
+  });
+}
+
 server.register(require('hapi-async-handler'), function(err) {
   if (err) {
     console.error(err);

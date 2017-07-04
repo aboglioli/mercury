@@ -10,7 +10,8 @@ module.exports = {
       prefix: 'api',
       version: 'v1'
     },
-    jwtKey: env.JWT_KEY || 'qwerty'
+    jwtKey: env.JWT_KEY || 'qwerty',
+    logging: true
   },
   database: {
     host: env.DB_HOST || 'mongodb',

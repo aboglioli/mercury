@@ -7,7 +7,7 @@
     "start": "nodemon index.js",
     "test": "mocha tests --recursive",
     "docker-start": "nodemon app/index.js",
-    "docker-test": "mocha app/tests --recursive"
+    "docker-test": "nodemon --exec \"mocha -R min\" app/tests"
   },
   "repository": {
     "type": "git",
