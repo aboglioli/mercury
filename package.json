@@ -25,6 +25,7 @@
     "hapi": "^16.4.3",
     "hapi-async-handler": "^1.0.3",
     "hapi-auth-jwt2": "^7.2.4",
+    "hapi-cors-headers": "^1.0.0",
     "hapi-swagger": "^7.7.0",
     "inert": "^4.2.0",
     "joi": "^10.5.2",
