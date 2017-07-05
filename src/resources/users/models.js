@@ -35,10 +35,17 @@ async function removeByEmail(email) {
   return await UserSchema.find({email}).remove();
 }
 
+async function removeAll() {
+  return await UserSchema.remove({});
+}
+
 module.exports = {
   create,
   getById,
   getByEmail,
   getAll,
-  removeByEmail
+  removeByEmail,
+  removeById,
+  removeByEmail,
+  removeAll
 };

@@ -4,4 +4,5 @@ config.app.logging = false;
 config.database.name = 'mercury-test';
 
 require('../src/core/db');
-module.exports = require('../src/server');
+
+module.exports = [require('./db'), require('../src/server')];

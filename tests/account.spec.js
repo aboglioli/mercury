@@ -1,20 +1,14 @@
 const {expect} = require('chai');
 
-const config = require('../src/config');
-const UserSchema = require('../src/schemas/user');
-const User = require('../src/resources/users/models');
-const server = require('./index');
+const [db, server] = require('./index');
 const r = require('./request')(server);
 
 describe('Account', () => {
-  beforeEach((done) => {
-    UserSchema.remove({}, () => {
-      User.create({
-        name: 'Admin',
-        email: 'admin@admin.com',
-        password: '123456',
-        scope: ['admin']
-      }).then(() => done());
+  beforeEach(async () => {
+    await db.createAdminAccount({
+      name: 'Admin',
+      email: 'admin@admin.com',
+      password: '123456'
     });
   });
 
