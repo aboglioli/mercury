@@ -5,4 +5,10 @@ config.database.name = 'mercury-test';
 
 require('../src/core/db');
 
-module.exports = [require('./db'), require('../src/server')];
+const server = require('../src/server');
+const request = require('./request');
+
+module.exports = [server, Object.assign({}, require('./utils'), {
+  request: request(server),
+  simpleRequest: request()
+})];

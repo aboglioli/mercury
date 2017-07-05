@@ -1,19 +1,20 @@
 const {expect} = require('chai');
 
-const [db, server] = require('./index');
-const r = require('./request')(server);
+const [server, utils] = require('./index');
+const User = require('../src/resources/users/models');
 
 describe('Account', () => {
-  beforeEach(async () => {
-    await db.createAdminAccount({
+  before(async () => {
+    await User.create({
       name: 'Admin',
       email: 'admin@admin.com',
-      password: '123456'
+      password: '123456',
+      scope: ['admin']
     });
   });
 
 	it('POST /account/login', (done) => {
-    r.post('account/login')
+    utils.request.post('account/login')
       .send({email: 'admin@admin.com', password: '123456'})
       .expect(200)
       .end((err ,res) => {
@@ -24,14 +25,14 @@ describe('Account', () => {
 	});
 
 	it('POST /account/register', (done) => {
-    r.post('account/register')
+    utils.request.post('account/register')
       .send({name: 'Test', email: 'test@test.com', password: 'test123'})
       .expect(201)
       .end((err ,res) => {
         if(err) {
           done(err);
         } else {
-          r.post('account/login')
+          utils.request.post('account/login')
             .send({email: 'test@test.com', password: 'test123'})
             .expect(200)
             .end((err ,res) => {

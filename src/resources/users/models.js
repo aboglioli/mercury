@@ -7,24 +7,27 @@ async function create(data) {
   const user = new UserSchema(data);
   await user.save();
 
-  return getById(user._id);
+  return await getById(user._id);
 }
 
 async function getById(userId) {
   return await UserSchema
     .findById(userId)
-    .select('-password');
+    .select('-password -__v')
+    .exec();
 }
 
 async function getByEmail(email) {
   return await UserSchema
-    .findOne({email});
+    .findOne({email})
+    .exec();
 }
 
 async function getAll() {
   return await UserSchema
     .find({})
-    .select('-password');
+    .select('-password -__v')
+    .exec();
 }
 
 async function removeById(userId) {

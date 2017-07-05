@@ -24,6 +24,29 @@ module.exports = [
     }
   },
   {
+    path: '/{userId}',
+    method: 'GET',
+    config: {
+      handler: {
+        async: UsersHandler.getById
+      },
+      auth: {
+        strategy: 'jwt',
+        scope: 'admin'
+      },
+      description: 'Get user by id',
+      tags: ['api', 'users'],
+      validate: {
+        headers: Joi.object({
+          authorization: Joi.string().required()
+        }).unknown(),
+        params: {
+          userId: Joi.string().required()
+        }
+      }
+    }
+  },
+  {
     path: '',
     method: 'POST',
     config: {
