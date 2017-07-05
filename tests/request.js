@@ -1,4 +1,4 @@
-const supertest = require('supertest');
+const supertest = require('supertest-as-promised');
 const request = require('request');
 
 const config = require('../src/config');

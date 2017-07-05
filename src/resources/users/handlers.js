@@ -10,7 +10,9 @@ async function getById(request, reply) {
 
 async function post(request, reply) {
   const user = await User.create(request.payload);
-  return reply().code(201);
+  return reply({
+    message: 'User created'
+  }).code(201);
 }
 
 module.exports = {

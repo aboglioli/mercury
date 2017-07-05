@@ -56,7 +56,6 @@ module.exports = [
       auth: {
         strategy: 'jwt',
         scope: 'admin',
-        mode: 'try'
       },
       description: 'Create user',
       tags: ['api', 'users'],
@@ -64,7 +63,8 @@ module.exports = [
         payload: {
           name: Joi.string(),
           email: Joi.string().email().required(),
-          password: Joi.string().required()
+          password: Joi.string().required(),
+          scope: Joi.array().items(Joi.string()).optional()
         },
         headers: Joi.object({
           authorization: Joi.string().required()
