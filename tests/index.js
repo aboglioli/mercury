@@ -3,7 +3,8 @@ const config = require('../src/config');
 config.app.logging = false;
 config.database.name = 'mercury-test';
 
-require('../src/core/db');
+const db = require('../src/core/db');
+db.connection.dropDatabase();
 
 const server = require('../src/server');
 const request = require('./request');

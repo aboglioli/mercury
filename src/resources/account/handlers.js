@@ -3,7 +3,7 @@ const _ = require('lodash');
 
 const config = require('../../config');
 const User = require('../users/models');
-const { comparePasswords } = require('../../core/authentication');
+const {comparePasswords} = require('../../core/authentication');
 
 async function get(request, reply) {
   return reply(await User.getById(request.auth.credentials.id));
@@ -26,12 +26,22 @@ async function login(request, reply) {
 }
 
 async function register(request, reply) {
-  const user = await User.create(request.payload);
-  return reply(_.omit(user, ['password'])).code(201);
+  try {
+    const user = await User.create(request.payload);
+    return reply(user).code(201);
+  } catch(e) {
+    return reply({message: e.message}).code(409);
+  }
+}
+
+async function put(request, reply) {
+  const user = await User.updateById(request.auth.credentials.id, request.payload);
+  return reply(user).code(200);
 }
 
 module.exports = {
   get,
   login,
-  register
+  register,
+  put
 };

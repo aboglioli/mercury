@@ -23,6 +23,30 @@ module.exports = [
     }
   },
   {
+    path: '',
+    method: 'PUT',
+    config: {
+      handler: {
+        async: AccountHandler.put
+      },
+      auth: {
+        strategy: 'jwt'
+      },
+      description: 'Update account',
+      tags: ['api', 'account'],
+      validate: {
+        payload: {
+          name: Joi.string().optional(),
+          email: Joi.string().email().optional(),
+          password: Joi.string().optional()
+        },
+        headers: Joi.object({
+          authorization: Joi.string().required()
+        }).unknown()
+      }
+    }
+  },
+  {
     path: '/login',
     method: 'POST',
     config: {

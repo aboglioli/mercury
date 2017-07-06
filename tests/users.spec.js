@@ -54,7 +54,10 @@ describe('Users', () => {
       })
       .expect(201);
 
-    expect(res.body.message).to.equal('User created');
+    expect(res.body).to.not.be.undefined;
+    expect(res.body).to.have.all.keys('_id', 'name', 'email', 'scope', 'created_at', 'updated_at');
+    expect(res.body.name).to.equal('Test');
+    expect(res.body.email).to.equal('test@test.com');
 	});
 
 });

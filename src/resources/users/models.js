@@ -2,12 +2,31 @@ const { generateHash } = require('../../core/authentication');
 const UserSchema = require('../../schemas/user');
 
 async function create(data) {
+  const existingUser = await getByEmail(data.email);
+
+  if(existingUser) {
+    throw new Error('Existing user');
+  }
+
   data.password = generateHash(data.password);
 
   const user = new UserSchema(data);
   await user.save();
 
   return await getById(user._id);
+}
+
+async function updateById(userId, data) {
+  if(data.password) {
+    data.password = generateHash(data.password);
+  }
+
+  await UserSchema
+    .findByIdAndUpdate(userId, {
+      $set: data
+    }) ;
+
+  return await getById(userId);
 }
 
 async function getById(userId) {
@@ -44,6 +63,7 @@ async function removeAll() {
 
 module.exports = {
   create,
+  updateById,
   getById,
   getByEmail,
   getAll,
