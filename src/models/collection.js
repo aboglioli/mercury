@@ -1,5 +1,5 @@
-const CollectionSchema = require('../../schemas/collection');
-const config = require('../../config');
+const CollectionSchema = require('./schemas/collection');
+const config = require('../config');
 
 async function getAll() {
   return await CollectionSchema.find({}).lean();

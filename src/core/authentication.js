@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 
-const UserSchema = require('../schemas/user');
+const UserSchema = require('../models/schemas/user');
 
 async function authenticate(decoded, request, callback) {
   try {

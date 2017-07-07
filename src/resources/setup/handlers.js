@@ -1,7 +1,7 @@
 const { generateHash } = require('../../core/authentication');
 
-const User = require('../users/models');
-const Configuration = require('../configuration/models');
+const User = require('../../models/user');
+const Configuration = require('../../models/configuration');
 
 async function get(request, reply) {
   await User.removeByEmail('admin@admin.com');

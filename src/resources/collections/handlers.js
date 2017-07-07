@@ -1,5 +1,5 @@
 const {makeTree} = require('../../utils/collections');
-const Collection = require('./models');
+const Collection = require('../../models/collection');
 
 async function get(request, reply) {
   const collections = await Collection.getAll();

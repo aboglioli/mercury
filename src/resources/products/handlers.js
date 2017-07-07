@@ -1,4 +1,4 @@
-const Product = require('./models');
+const Product = require('../../models/product');
 
 async function get(request, reply) {
   if(request.query)

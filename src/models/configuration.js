@@ -1,7 +1,7 @@
 const _ = require('lodash');
 
-const ConfigurationSchema = require('../../schemas/configuration');
-const config = require('../../config');
+const ConfigurationSchema = require('./schemas/configuration');
+const config = require('../config');
 
 async function get() {
   return Object.assign({},

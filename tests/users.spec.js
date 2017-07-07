@@ -1,7 +1,7 @@
 const {expect} = require('chai');
 
 const [server, utils] = require('./index');
-const User = require('../src/resources/users/models');
+const User = require('../src/models/user');
 
 describe('Users', () => {
   let adminToken;

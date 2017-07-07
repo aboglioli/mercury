@@ -1,4 +1,4 @@
-const ProductSchema = require('../../schemas/product');
+const ProductSchema = require('./schemas/product');
 
 async function create(data, author) {
   const product = new ProductSchema(Object.assign({}, data, {author}));

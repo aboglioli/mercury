@@ -2,7 +2,7 @@ const JWT = require('jsonwebtoken');
 const _ = require('lodash');
 
 const config = require('../../config');
-const User = require('../users/models');
+const User = require('../../models/user');
 const {comparePasswords} = require('../../core/authentication');
 
 async function get(request, reply) {

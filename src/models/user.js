@@ -1,5 +1,5 @@
-const { generateHash } = require('../../core/authentication');
-const UserSchema = require('../../schemas/user');
+const { generateHash } = require('../core/authentication');
+const UserSchema = require('./schemas/user');
 
 async function create(data) {
   const existingUser = await getByEmail(data.email);
